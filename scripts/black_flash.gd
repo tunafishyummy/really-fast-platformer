@@ -16,6 +16,6 @@ func impact_frame(sprite):
 	await RenderingServer.frame_post_draw
 	await RenderingServer.frame_post_draw
 	await RenderingServer.frame_post_draw
-	# Restore everything
+	# Restore everything 
 	black_flash.visible = false
 	animated_sprite.material = original
