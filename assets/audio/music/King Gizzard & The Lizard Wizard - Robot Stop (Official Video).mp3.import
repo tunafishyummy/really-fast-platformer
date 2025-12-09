@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cg3xev2lm7572"
+path="res://.godot/imported/King Gizzard & The Lizard Wizard - Robot Stop (Official Video).mp3-7ba85228abf2cba331c466a914bdb7f1.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/King Gizzard & The Lizard Wizard - Robot Stop (Official Video).mp3"
+dest_files=["res://.godot/imported/King Gizzard & The Lizard Wizard - Robot Stop (Official Video).mp3-7ba85228abf2cba331c466a914bdb7f1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

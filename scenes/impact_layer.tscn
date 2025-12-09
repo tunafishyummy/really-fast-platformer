@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfl1aqj6w1a24"]
+
+[sub_resource type="GDScript" id="GDScript_5tki6"]
+
+[node name="ImpactLayer" type="CanvasLayer"]
+layer = -1
+follow_viewport_enabled = true
+script = SubResource("GDScript_5tki6")
