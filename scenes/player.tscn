@@ -331,7 +331,7 @@ z_index = 2
 z_as_relative = false
 position = Vector2(-1, -10)
 sprite_frames = SubResource("SpriteFrames_dqkch")
-animation = &"jumppriming"
+animation = &"fall"
 autoplay = "idle"
 
 [node name="BlackFlash" type="ColorRect" parent="."]

@@ -88,7 +88,7 @@ func jump_and_gravity(delta, jump):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump
 	if Input.is_action_just_released("jump") and not is_on_floor():
-		velocity.y = velocity.y/2
+		velocity.y = velocity.y/1.5
 
 func move_x(speed):
 	var direction = Input.get_axis("wasd_a","wasd_d")
@@ -123,20 +123,19 @@ func handle_animations():
 				animated_sprite.play("run_idlepriming")
 			elif direction != 0:
 				animated_sprite.play("walkpriming")
-			else:
+			elif direction == 0:
 				animated_sprite.play("idlepriming")
-			return
-
-	if not is_on_floor() and velocity.y < 0:
-		animated_sprite.play("jump")
-	elif not is_on_floor() and velocity.y > 0:
-		animated_sprite.play("fall")
 	else:
-		if running and direction != 0:
-			animated_sprite.play("run")
-		elif running and direction == 0:
-			animated_sprite.play("run_idle")
-		elif direction == 0:
-			animated_sprite.play("idle")
+		if not is_on_floor() and velocity.y < 0:
+			animated_sprite.play("jump")
+		elif not is_on_floor() and velocity.y > 0:
+			animated_sprite.play("fall")
 		else:
-			animated_sprite.play("walk")
+			if running and direction != 0:
+				animated_sprite.play("run")
+			elif running and direction == 0:
+				animated_sprite.play("run_idle")
+			elif direction == 0:
+				animated_sprite.play("idle")
+			else:
+				animated_sprite.play("walk")
