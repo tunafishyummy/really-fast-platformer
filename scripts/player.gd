@@ -8,7 +8,7 @@ const WALK_SPEED = 40
 const RUN_SPEED = 200
 
 const WALK_JUMP = 0
-const RUN_JUMP = -350
+const RUN_JUMP = -400
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var black_flash: ColorRect = $BlackFlash
@@ -114,8 +114,12 @@ func handle_animations():
 	if priming:
 		if not is_on_floor() and velocity.y < 0:
 			animated_sprite.play("jumppriming")
+			if animated_sprite.frame == 2:
+				animated_sprite.frame = 2
 		elif not is_on_floor() and velocity.y > 0:
 			animated_sprite.play("fallpriming")
+			if animated_sprite.frame == 2:
+				animated_sprite.frame = 2
 		else:
 			if running and direction != 0:
 				animated_sprite.play("runpriming")
@@ -128,8 +132,12 @@ func handle_animations():
 	else:
 		if not is_on_floor() and velocity.y < 0:
 			animated_sprite.play("jump")
+			if animated_sprite.frame == 2:
+				animated_sprite.frame = 2
 		elif not is_on_floor() and velocity.y > 0:
 			animated_sprite.play("fall")
+			if animated_sprite.frame == 2:
+				animated_sprite.frame = 2
 		else:
 			if running and direction != 0:
 				animated_sprite.play("run")
