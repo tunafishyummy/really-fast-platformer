@@ -88,7 +88,7 @@ func jump_and_gravity(delta, jump):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump
 	if Input.is_action_just_released("jump") and not is_on_floor():
-		velocity.y = velocity.y/1.5
+		velocity.y = velocity.y/1.7
 
 func move_x(speed):
 	var direction = Input.get_axis("wasd_a","wasd_d")
