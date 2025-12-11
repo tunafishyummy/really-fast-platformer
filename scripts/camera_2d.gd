@@ -59,9 +59,9 @@ func _on_prime_stopped() -> void:
 
 func _on_primed_dash() -> void:
 	position_smoothing_enabled = false
-	start_camera_shshake()
+	start_camera_shake()
 
-func start_camera_shshake() -> void:
+func start_camera_shake() -> void:
 	shake_time = shake_duration
 
 func cam_zoom_to(target: float) -> void:

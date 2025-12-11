@@ -8,13 +8,11 @@ const WALK_SPEED = 40
 const RUN_SPEED = 200
 
 const WALK_JUMP = 0
-const RUN_JUMP = -400
+const RUN_JUMP = -350
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var black_flash: ColorRect = $BlackFlash
 @onready var impact: ColorRect = $BlackFlash
-
-
 
 var running = false
 var priming = false
@@ -89,6 +87,8 @@ func jump_and_gravity(delta, jump):
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump
+	if Input.is_action_just_released("jump") and not is_on_floor():
+		velocity.y = velocity.y/2
 
 func move_x(speed):
 	var direction = Input.get_axis("wasd_a","wasd_d")
@@ -112,21 +112,31 @@ func handle_animations():
 		facing = -1
 
 	if priming:
-		if running and direction != 0:
-			animated_sprite.play("runpriming")
-		elif running:
-			animated_sprite.play("run_idlepriming")
-		elif direction != 0:
-			animated_sprite.play("walkpriming")
+		if not is_on_floor() and velocity.y < 0:
+			animated_sprite.play("jumppriming")
+		elif not is_on_floor() and velocity.y > 0:
+			animated_sprite.play("fallpriming")
 		else:
-			animated_sprite.play("idlepriming")
-		return
+			if running and direction != 0:
+				animated_sprite.play("runpriming")
+			elif running:
+				animated_sprite.play("run_idlepriming")
+			elif direction != 0:
+				animated_sprite.play("walkpriming")
+			else:
+				animated_sprite.play("idlepriming")
+			return
 
-	if running and direction != 0:
-		animated_sprite.play("run")
-	elif running and direction == 0:
-		animated_sprite.play("run_idle")
-	elif direction == 0:
-		animated_sprite.play("idle")
+	if not is_on_floor() and velocity.y < 0:
+		animated_sprite.play("jump")
+	elif not is_on_floor() and velocity.y > 0:
+		animated_sprite.play("fall")
 	else:
-		animated_sprite.play("walk")
+		if running and direction != 0:
+			animated_sprite.play("run")
+		elif running and direction == 0:
+			animated_sprite.play("run_idle")
+		elif direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("walk")
