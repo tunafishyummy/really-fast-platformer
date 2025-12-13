@@ -15,17 +15,22 @@ const RUN_JUMP = -400
 @onready var impact: ColorRect = $BlackFlash
 @onready var coyote_timer: Timer = $CoyoteTimer
 
-var running = false
-var priming = false
-var prime_on_cooldown = false
+var running := false
+var priming := false
+var prime_on_cooldown := false
 var prime_cooldown_time := 0
-var done_coiling = false
-var facing = 1
+var done_coiling := false
+var facing := 1
+var jumped_this_frame := false
+
 
 func _ready():
 	add_to_group("player")
 
 func _physics_process(delta):
+	
+	jumped_this_frame = false
+	
 	running = Input.is_action_pressed("run")
 	prime_logic()
 	
@@ -94,6 +99,7 @@ func jump_and_gravity(delta, jump):
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or not coyote_timer.is_stopped()):
 		velocity.y = jump
 		coyote_timer.stop
+		jumped_this_frame = true
 	if Input.is_action_just_released("jump") and not is_on_floor():
 		velocity.y = velocity.y/1.7
 
@@ -109,7 +115,7 @@ func move_x(speed):
 # ---- MOVEMENT POLISH ----
 
 func coyote_time(was_on_floor):
-	if was_on_floor and not is_on_floor():
+	if was_on_floor and not is_on_floor() and not jumped_this_frame:
 		coyote_timer.start()
 
 # ---- ANIMATIONS ----

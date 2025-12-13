@@ -345,5 +345,5 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("3_qhqgy")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.28200000000000003
+wait_time = 0.182
 one_shot = true
