@@ -50,10 +50,10 @@ func _process(delta: float) -> void:
 
 func _on_prime_started() -> void:
 	prime_camera_leading = true
-	cam_zoom_to(3.5)
+	cam_zoom_to(2)
 
 func _on_prime_stopped() -> void:
-	cam_zoom_to(4)
+	cam_zoom_to(3)
 	position_smoothing_enabled = true
 	prime_camera_leading = false
 
