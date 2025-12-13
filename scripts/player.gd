@@ -13,6 +13,7 @@ const RUN_JUMP = -400
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var black_flash: ColorRect = $BlackFlash
 @onready var impact: ColorRect = $BlackFlash
+@onready var coyote_timer: Timer = $CoyoteTimer
 
 var running = false
 var priming = false
@@ -34,7 +35,12 @@ func _physics_process(delta):
 		walk_logic(delta)
 
 	handle_animations()
+	
+	var was_on_floor := is_on_floor()
+	
 	move_and_slide()
+	
+	coyote_time(was_on_floor)
 
 # ---- PRIME LOGIC ----
 
@@ -85,8 +91,9 @@ func jump_and_gravity(delta, jump):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or not coyote_timer.is_stopped()):
 		velocity.y = jump
+		coyote_timer.stop
 	if Input.is_action_just_released("jump") and not is_on_floor():
 		velocity.y = velocity.y/1.7
 
@@ -98,6 +105,12 @@ func move_x(speed):
 		facing = sign(direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+		
+# ---- MOVEMENT POLISH ----
+
+func coyote_time(was_on_floor):
+	if was_on_floor and not is_on_floor():
+		coyote_timer.start()
 
 # ---- ANIMATIONS ----
 
